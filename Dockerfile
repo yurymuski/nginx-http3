@@ -61,6 +61,7 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     --add-module=/opt/ngx_brotli \
     --with-http_v3_module 	\
     --with-openssl=/opt/quiche/deps/boringssl \
+    --build="quiche-$(git --git-dir=../quiche/.git rev-parse --short HEAD)" \
     --with-quiche=/opt/quiche &&\
     make && \
     make install;
