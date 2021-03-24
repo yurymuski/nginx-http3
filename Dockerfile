@@ -1,14 +1,14 @@
-FROM ubuntu:18.04 AS builder
+FROM ubuntu:20.04 AS builder
 
 LABEL maintainer="Yury Muski <muski.yury@gmail.com>"
 
 ENV NGINX_PATH /etc/nginx
-ENV NGINX_VERSION 1.16.1
+ENV NGINX_VERSION 1.19.6
 
 WORKDIR /opt
 
 RUN apt-get update && \
-    apt-get install -y libpcre3 libpcre3-dev zlib1g-dev zlib1g golang-go build-essential git curl cmake;
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libpcre3 libpcre3-dev zlib1g-dev zlib1g golang-go build-essential git curl cmake;
 
 RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     tar xvzf nginx-$NGINX_VERSION.tar.gz && \
@@ -66,14 +66,14 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     make && \
     make install;
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 COPY --from=builder /usr/sbin/nginx /usr/sbin/
 COPY --from=builder /etc/nginx/ /etc/nginx/
 
 
-RUN groupadd  nginx \
-  && useradd -m -d  /var/cache/nginx -s /sbin/nologin -g nginx nginx \
+RUN groupadd -g 1000 nginx \
+  && useradd -m -u 1000 -d /var/cache/nginx -s /sbin/nologin -g nginx nginx \
   # forward request and error logs to docker log collector
   && mkdir -p /var/log/nginx \
   && touch /var/log/nginx/access.log /var/log/nginx/error.log \
@@ -81,7 +81,7 @@ RUN groupadd  nginx \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
-EXPOSE 80
+EXPOSE 80 443
 
 STOPSIGNAL SIGTERM
 
