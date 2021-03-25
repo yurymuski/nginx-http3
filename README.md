@@ -1,7 +1,9 @@
 # nginx-http3
 Nginx compiled with *BoringSSL* and *quiche* for *HTTP3* support, *Brotli* support.
 
-Based on ubuntu:18.04, size 98.5MB
+Based on ubuntu:20.04, size 109MB
+
+Link for [quiche + nginx manual](https://github.com/cloudflare/quiche/tree/master/extras/nginx)
 
 ### usage
 - get certs from certbot in /etc/letsencrypt/
