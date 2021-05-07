@@ -7,7 +7,20 @@ Link for [quiche + nginx manual](https://github.com/cloudflare/quiche/tree/maste
 
 ### usage
 - get certs from certbot in /etc/letsencrypt/
+
+```
+docker run -it --rm --name certbot \
+    -v "${PWD}/temp/letsencrypt:/etc/letsencrypt" \
+    certbot/certbot certonly --manual --preferred-challenges=dns\
+        --agree-tos \
+        --email your@email \
+        --no-eff-email \
+        -d your_domain
+```
+
 - create nginx.conf like in example
+
+`docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v ${PWD}/temp/letsencrypt/:/opt/nginx/certs/ -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-quic`
 
 `docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v /etc/letsencrypt/:/opt/nginx/certs/ -v /opt/nginx/conf/example.nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-quic`
 
