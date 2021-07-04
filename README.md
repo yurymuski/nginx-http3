@@ -1,6 +1,8 @@
 # nginx-http3
 Nginx compiled with *BoringSSL* and *quiche* for *HTTP3* support, *Brotli* support.
 
+## Nginx version: nginx/1.19.6 (quiche-5afe288)
+
 Based on ubuntu:20.04, size 109MB
 
 Link for [quiche + nginx manual](https://github.com/cloudflare/quiche/tree/master/extras/nginx)
