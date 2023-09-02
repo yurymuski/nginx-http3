@@ -3,7 +3,7 @@ FROM debian:12 AS builder
 LABEL maintainer="Yury Muski <muski.yury@gmail.com>"
 
 ENV NGINX_PATH /etc/nginx
-ENV NGINX_VERSION 1.19.6
+ENV NGINX_VERSION 1.16.1
 
 ENV QUICHE_VERSION 0.18.0
 
