@@ -1,11 +1,11 @@
-FROM ubuntu:20.04 AS builder
+FROM debian:12 AS builder
 
 LABEL maintainer="Yury Muski <muski.yury@gmail.com>"
 
 ENV NGINX_PATH /etc/nginx
 ENV NGINX_VERSION 1.19.6
 
-ENV QUICHE_VERSION 0.9.0
+ENV QUICHE_VERSION 0.18.0
 
 WORKDIR /opt
 
@@ -17,7 +17,7 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     git clone --branch $QUICHE_VERSION --recursive https://github.com/cloudflare/quiche && \
     git clone --recursive https://github.com/google/ngx_brotli.git && \
     cd nginx-$NGINX_VERSION && \
-    patch -p01 < ../quiche/extras/nginx/nginx-1.16.patch && \ 
+    patch -p01 < ../quiche/nginx/nginx-1.16.patch && \
     curl https://sh.rustup.rs -sSf | sh -s -- -y -q && \
     export PATH="$HOME/.cargo/bin:$PATH" && \
     ./configure            	\
@@ -68,7 +68,7 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     make && \
     make install;
 
-FROM ubuntu:20.04
+FROM debian:12-slim
 
 COPY --from=builder /usr/sbin/nginx /usr/sbin/
 COPY --from=builder /etc/nginx/ /etc/nginx/

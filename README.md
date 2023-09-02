@@ -4,11 +4,11 @@ Nginx compiled with *BoringSSL* and *quiche* for *HTTP3* support, *Brotli* suppo
 ## version
 
 nginx version: nginx/1.19.6 (quiche-ad9d933)
-quiche 0.9.0
+quiche 0.18.0
 
 Based on ubuntu:20.04, size 109MB
 
-Link for [quiche + nginx manual](https://github.com/cloudflare/quiche/tree/master/extras/nginx)
+Link for [quiche + nginx manual](https://github.com/cloudflare/quiche/tree/master/nginx)
 
 ### usage
 - get certs from certbot in /etc/letsencrypt/
