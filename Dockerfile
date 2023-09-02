@@ -10,12 +10,12 @@ ENV QUICHE_VERSION 0.18.0
 WORKDIR /opt
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libpcre3 libpcre3-dev zlib1g-dev zlib1g golang-go build-essential git curl cmake;
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libpcre3 libpcre3-dev zlib1g-dev zlib1g golang-go build-essential libbrotli-dev git curl cmake;
 
 RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     tar xvzf nginx-$NGINX_VERSION.tar.gz && \
     git clone --branch $QUICHE_VERSION --recursive https://github.com/cloudflare/quiche && \
-    cd quiche && git submodule update --init && cd .. && \
+    cd /opt/quiche && git submodule update --init && cd /opt/ && \
     git clone --recursive https://github.com/google/ngx_brotli.git && \
     cd nginx-$NGINX_VERSION && \
     patch -p01 < ../quiche/nginx/nginx-1.16.patch && \
@@ -63,7 +63,7 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     --with-stream_ssl_preread_module \
     --add-module=/opt/ngx_brotli \
     --with-http_v3_module 	\
-    --with-openssl=/opt/quiche/deps/boringssl \
+    --with-openssl=/opt/quiche/quiche/deps/boringssl \
     --build="quiche-$(git --git-dir=../quiche/.git rev-parse --short HEAD)" \
     --with-quiche=/opt/quiche &&\
     make && \
