@@ -3,10 +3,8 @@ Nginx compiled with *BoringSSL* and *quiche* for *HTTP3* support, *Brotli* suppo
 
 ## version
 
-nginx version: nginx/1.19.6 (quiche-ad9d933)
+nginx version: nginx/1.16.1 (quiche-28ef289f)
 quiche 0.18.0
-
-Based on ubuntu:20.04, size 109MB
 
 Link for [quiche + nginx manual](https://github.com/cloudflare/quiche/tree/master/nginx)
 
@@ -25,9 +23,9 @@ docker run -it --rm --name certbot \
 
 - create nginx.conf like in example
 
-`docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v ${PWD}/temp/letsencrypt/:/opt/nginx/certs/ -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-quic`
+`docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v ${PWD}/temp/letsencrypt/:/opt/nginx/certs/ -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-http3`
 
-`docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v /etc/letsencrypt/:/opt/nginx/certs/ -v /opt/nginx/conf/example.nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-quic`
+`docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v /etc/letsencrypt/:/opt/nginx/certs/ -v /opt/nginx/conf/example.nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-http3`
 
 ### Checking
 

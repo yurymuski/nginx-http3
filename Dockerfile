@@ -71,6 +71,9 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
 
 FROM debian:12-slim
 
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libpcre3 libbrotli1
+
 COPY --from=builder /usr/sbin/nginx /usr/sbin/
 COPY --from=builder /etc/nginx/ /etc/nginx/
 
