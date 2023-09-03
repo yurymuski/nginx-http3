@@ -1,4 +1,4 @@
-FROM debian:12 AS builder
+FROM ubuntu:20.04 AS builder
 
 LABEL maintainer="Yury Muski <muski.yury@gmail.com>"
 
@@ -69,7 +69,7 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     make && \
     make install;
 
-FROM debian:12-slim
+FROM ubuntu:20.04
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y libpcre3 libbrotli1

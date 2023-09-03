@@ -25,7 +25,6 @@ docker run -it --rm --name certbot \
 
 `docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v ${PWD}/temp/letsencrypt/:/opt/nginx/certs/ -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-http3`
 
-`docker run --name nginx -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v /etc/letsencrypt/:/opt/nginx/certs/ -v /opt/nginx/conf/example.nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-http3`
 
 ### Checking
 
