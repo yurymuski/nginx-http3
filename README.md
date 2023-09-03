@@ -24,8 +24,8 @@ docker run -it --rm --name certbot \
 - create nginx.conf like in example
 
 ```sh
-# NOTE: --priviliged needed for setsockopt(SO_TXTIME) access
-docker run --name nginx --priviliged -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v ${PWD}/temp/letsencrypt/:/opt/nginx/certs/ -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-http3
+# NOTE: --privileged needed for setsockopt(SO_TXTIME) access
+docker run --name nginx --privileged -d -p 80:80 -p 443:443/tcp -p 443:443/udp -v ${PWD}/temp/letsencrypt/:/opt/nginx/certs/ -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf  ymuski/nginx-http3
 ```
 
 
