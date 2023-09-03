@@ -61,7 +61,7 @@ RUN curl -O https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
     --with-stream_realip_module \
     --with-stream_ssl_module \
     --with-stream_ssl_preread_module \
-    --with-debug
+    --with-debug \
     --add-module=/opt/ngx_brotli \
     --with-http_v3_module 	\
     --with-openssl=/opt/quiche/quiche/deps/boringssl \
